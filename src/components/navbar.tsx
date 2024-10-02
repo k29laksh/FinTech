@@ -31,24 +31,9 @@ const Navbar = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const mainNavItems = ["Home", "Explore Us", "About Us", "Contact Us"];
 
-  useEffect(() => {
-    const updateHighlight = () => {
-      
-      if (navRef.current) {
-        const navItem = navRef.current.children[activeIndex] as HTMLElement;
-        setHighlightStyle({
-          width: `${navItem.offsetWidth}px`,
-          transform: `translateX(${navItem.offsetLeft}px)`,
-        });
-      }
-    };
 
-    updateHighlight();
-    window.addEventListener("resize", updateHighlight);
-    return () => window.removeEventListener("resize", updateHighlight);
-  }, [activeIndex]);
+   
 
   const handleSignInComplete = () => {
     setOpen(false);
@@ -58,26 +43,29 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="font-poppin  bg-black flex items-center justify-between text-white shadow h-[4rem] px-6">
-      <div className="flex items-center gap-6">
-        <Image
+    <nav className="font-poppin fixed top-0 left-0 right-0 z-50 bg-black flex items-center justify-between text-white shadow h-[4rem] px-6 text-sm">
+      <div className="flex items-center gap-3">
+       <Link href={'/'}>
+       <Image
           src="/citi-logo.png"
           alt="Logo"
-          width={60}
+          width={50}
           height={60}
           className=""
-        />
-      </div>
-        <div className="flex space-x-6 items-center ">
-           <div>Home</div>
-           <div>Market</div>
-           <div>Courses</div>
-           <div>Activity</div>
-           
-           <div>Portfolio</div>
-         
+        /></Link>
+        
+      {/* </div> */}
+        {/* <div className="flex space-x-4 items-center"> */}
+           {/* <div>Home</div> */}
+           <Link href='/market/investment' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out">Market</Link>
+           <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Courses</div>
+           <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Activity</div>           
+           <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Portfolio</div>         
         </div>
-      <div className="flex space-x-6 ">
+      <div className="flex space-x-6 items-center">
+        <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Careers</div>
+        <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">News</div>
+        <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Contact Us</div>
         {!user ? (
           <>
             <Dialog open={open} onOpenChange={setOpen}>
@@ -109,13 +97,10 @@ const Navbar = () => {
           </>
         ) : (
           <div className="flex items-center space-x-4">
-            <div >
+            <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">
                 Dashboard
             </div>
-            <div className="flex items-center space-x-2">
-                <div>{user?.user?.name}</div>
                 <div className="w-9 h-9 rounded-full flex justify-center items-center bg-slate-200 text-gray-800">{user?.user?.name?.charAt(0)?.toUpperCase()}</div>
-            </div>
 
             {/* <form>
               <div className="bg-white text-black">

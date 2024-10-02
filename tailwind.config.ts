@@ -20,6 +20,7 @@ const config = {
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
+        playfair: ['Playfair Display', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

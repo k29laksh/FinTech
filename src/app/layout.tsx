@@ -20,10 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} h-screen`}>
+      <body className={`${inter.className} `}>
         <SessionProvider>
           <Navbar />
-          <main className="h-full bg-black">{children}</main>
+          <main className=" bg-black">{children}</main>
           <Toaster />
         </SessionProvider>
       </body>
