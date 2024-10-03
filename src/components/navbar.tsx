@@ -57,7 +57,7 @@ const Navbar = () => {
       {/* </div> */}
         {/* <div className="flex space-x-4 items-center"> */}
            {/* <div>Home</div> */}
-           <Link href='/market/investment' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out">Market</Link>
+           <Link href='/market/my-portfolio' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out">Market</Link>
            <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Courses</div>
            <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Activity</div>           
            <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Portfolio</div>         
