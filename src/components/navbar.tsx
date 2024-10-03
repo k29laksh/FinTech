@@ -59,7 +59,7 @@ const Navbar = () => {
            {/* <div>Home</div> */}
            <Link href='/market/my-portfolio' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out">Market</Link>
            <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Courses</div>
-           <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Activity</div>           
+           <Link href='/activity' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Activity</Link>           
            <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Portfolio</div>         
         </div>
       <div className="flex space-x-6 items-center">
