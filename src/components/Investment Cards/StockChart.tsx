@@ -1,9 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import BuyForm from "../Investment-Dashboard/BuyForm";
-import SellForm from "../Investment-Dashboard/SellForm";
-import Popup from "../Popup";
-import { Button } from "../ui/button";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 import {
@@ -17,6 +13,12 @@ import {
   Legend,
 } from "chart.js";
 
+import BuyForm from "../Investment-Dashboard/BuyForm";
+import SellForm from "../Investment-Dashboard/SellForm";
+
+import { Button } from "../ui/button";
+import Popup from "../Popup";
+
 // Register Chart.js components
 ChartJS.register(
   CategoryScale,
@@ -28,25 +30,25 @@ ChartJS.register(
   Legend
 );
 
-const StockChart = () => {
-  const [stockSymbol, setStockSymbol] = useState("IBM"); // Default symbol
+const StockChart = ({stockSymbol}) => {
   const [currency, setCurrency] = useState("INR"); // Default currency
   const [stockData, setStockData] = useState([]); // Stock data points (prices)
   const [labels, setLabels] = useState([]); // X-axis labels (timestamps)
   const [loading, setLoading] = useState(true);
   const [conversionRate, setConversionRate] = useState(1); // Conversion rate (USD to INR)
   const [errorMessage, setErrorMessage] = useState(""); // Error message handling
-  const [searchTerm, setSearchTerm] = useState(""); // Search term
-  const [suggestions, setSuggestions] = useState([]); // Stock symbol suggestions
-  const [isBuyOpen, setIsBuyOpen] = useState(false);
-  const [isSellOpen, setIsSellOpen] = useState(false);
 
+  const [isBuyOpen, setIsBuyOpen] = useState(false); // Popup state for buy form
+  const [isSellOpen, setIsSellOpen] = useState(false); // Popup state for sell form
+
+  // Handlers for opening and closing Buy and Sell forms
   const handleBuyOpen = () => setIsBuyOpen(true);
   const handleSellOpen = () => setIsSellOpen(true);
   const handleClose = () => {
     setIsBuyOpen(false);
     setIsSellOpen(false);
   };
+
   // Fetch stock data when the stock symbol or currency changes
   useEffect(() => {
     if (!stockSymbol) return;
@@ -58,7 +60,7 @@ const StockChart = () => {
 
         // Fetch stock data from Alpha Vantage
         const stockResponse = await axios.get(
-          `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol}&interval=5min&apikey=IW6TBX85KQJYB68P`
+          `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol.symbol}&interval=5min&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
         );
 
         const timeSeries = stockResponse.data["Time Series (5min)"];
@@ -98,39 +100,6 @@ const StockChart = () => {
 
     fetchStockData();
   }, [stockSymbol, currency]);
-
-  // Fetch stock symbol suggestions
-  const fetchSuggestions = async (query) => {
-    try {
-      const response = await axios.get(
-        `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
-      );
-      const suggestedStocks = response.data.bestMatches.map((stock) => ({
-        symbol: stock["1. symbol"],
-        name: stock["2. name"],
-      }));
-      setSuggestions(suggestedStocks);
-    } catch (error) {
-      console.error("Error fetching stock suggestions:", error);
-    }
-  };
-
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-
-    if (value) {
-      fetchSuggestions(value); // Fetch suggestions based on input
-    } else {
-      setSuggestions([]); // Clear suggestions if input is empty
-    }
-  };
-
-  const handleSuggestionClick = (symbol) => {
-    setStockSymbol(symbol); // Set the stock symbol when a suggestion is clicked
-    setSearchTerm("");
-    setSuggestions([]); // Clear suggestions after selection
-  };
 
   // Chart.js configuration
   const chartData = {
@@ -178,53 +147,47 @@ const StockChart = () => {
 
   return (
     <div className="p-6 bg-white/10 text-white rounded-lg shadow-md w-full h-auto">
-       <div className="flex justify-between">
-      <div>
-        <h2 className="text-2xl font-bold ">Bitcoin(BTC)</h2>
-        <div className="flex items-center py-4 gap-8">
-          <h2 className="text-xl font-semibold ">$42715.35</h2>
-          <p className="text-red-400 px-2 py-1 text-sm bg-red-400/10 rounded-full">
-            -20.9%
-          </p>
+      {/* Bitcoin Section */}
+      <div className="flex justify-between">
+        <div>
+          <h2 className="text-2xl font-bold">{stockSymbol?.name} ({stockSymbol?.symbol})</h2>
+          <div className="flex items-center py-4 gap-8">
+            <h2 className="text-xl font-semibold">${stockSymbol?.price}</h2>
+            <div className="text-right">
+                  
+                  <div className={stockSymbol.change >= 0 ? "text-green-400 px-3 py-1 text-sm bg-green-400/10 rounded-full" : "text-red-400 px-3 py-1 text-sm bg-red-400/10 rounded-full"}>
+                    {stockSymbol.change >= 0 ? '+' : ''}{stockSymbol.change}%
+                  </div>
+                </div>
+          </div>
         </div>
-      </div>
-      <div className="flex gap-6">
-        <Button className="bg-blue-600 text-white" onClick={handleBuyOpen}>Buy Now</Button>
-        <Button className="bg-green-600 text-white" onClick={handleSellOpen}>Sell Now</Button>
-      </div>
+        <div className="flex gap-6">
+          <Button className="bg-blue-600 text-white" onClick={handleBuyOpen}>
+            Buy Now
+          </Button>
+          <Button className="bg-green-600 text-white" onClick={handleSellOpen}>
+            Sell Now
+          </Button>
+        </div>
 
-      {/* Buy Form Popup */}
-      <Popup open={isBuyOpen} onClose={handleClose} title="Buy Stock">
-        <BuyForm stockName="Bitcoin(BTC)" stockPrice="42715.35" availableBalance="1000000.00" onClose={handleClose} />
-      </Popup>
+        {/* Buy Form Popup */}
+        <Popup open={isBuyOpen} onClose={handleClose} title="Buy Stock">
+          <BuyForm
+            stockName="Bitcoin (BTC)"
+            stockPrice="42715.35"
+            availableBalance="1000000.00"
+            onClose={handleClose}
+          />
+        </Popup>
 
-      {/* Sell Form Popup */}
-      <Popup open={isSellOpen} onClose={handleClose} title="Sell Stock">
-        <SellForm stockName="Bitcoin(BTC)" stockPrice="42715.35" onClose={handleClose} />
-      </Popup>
-    </div>
-      {/* Search Section */}
-      <div className="mb-4 flex flex-col relative">
-        <input
-          type="text"
-          placeholder="Search stock symbol (e.g., IBM)"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="p-2  bg-white/15 text-white rounded mb-2"
-        />
-        {suggestions.length > 0 && (
-          <ul className="absolute top-12 bg-white/10 text-white w-full rounded shadow-md max-h-40 overflow-y-auto">
-            {suggestions.map((suggestion) => (
-              <li
-                key={suggestion.symbol}
-                className="p-2 cursor-pointer hover:bg-gray-700"
-                onClick={() => handleSuggestionClick(suggestion.symbol)}
-              >
-                {suggestion.symbol} - {suggestion.name}
-              </li>
-            ))}
-          </ul>
-        )}
+        {/* Sell Form Popup */}
+        <Popup open={isSellOpen} onClose={handleClose} title="Sell Stock">
+          <SellForm
+            stockName="Bitcoin (BTC)"
+            stockPrice="42715.35"
+            onClose={handleClose}
+          />
+        </Popup>
       </div>
 
       {/* Currency Selection */}
@@ -244,9 +207,6 @@ const StockChart = () => {
           <option value="GBP">GBP</option>
         </select>
       </div>
-
-      {/* Error Message */}
-      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
       {/* Stock Chart */}
       {loading ? (

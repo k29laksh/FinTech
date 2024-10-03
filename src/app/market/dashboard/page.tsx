@@ -1,4 +1,4 @@
-import CurrectStocks from '@/components/Investment-Dashboard/CurrentStocks'
+import CurrectStocks from '@/components/Investment-Dashboard/CurrentStocks2'
 import InvestmentSidebar from '@/components/Sidebars/Investment'
 import React from 'react'
 import '@/css/scrollbar.css'

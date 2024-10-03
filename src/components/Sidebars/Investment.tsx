@@ -20,7 +20,7 @@ const InvestmentSidebar = () => {
     { icon: VscGraph, label: "My-Portfolio", path: "/market/my-portfolio" },
     { icon: LuLayoutDashboard, label: "Dashboard", path: "/market/dashboard" },
     { icon: AiOutlineBook, label: "Courses", path: "/market/courses" },
-    { icon: MdOutlineHistory, label: "News", path: "/market/news" },
+    
     { icon: AiOutlineSetting, label: "Settings", path: "/settings" },
     { icon: AiOutlineQuestionCircle, label: "Help and Support", path: "/help" },
   ];
@@ -38,14 +38,14 @@ const InvestmentSidebar = () => {
           <div className="p-5 h-full flex flex-col justify-between">
             {/* Upper Section */}
             <div className="mb-2 flex flex-col space-y-4">
-              {navItems.slice(0, 4).map((item, index) => (
+              {navItems.slice(0, 3).map((item, index) => (
                 <NavItem key={index} item={item} isActive={pathname === item.path} />
               ))}
             </div>
 
             {/* Lower Section */}
             <div className="mb-2 flex flex-col space-y-4">
-              {navItems.slice(4).map((item, index) => (
+              {navItems.slice(3).map((item, index) => (
                 <NavItem key={index} item={item} isActive={pathname === item.path} />
               ))}
             </div>

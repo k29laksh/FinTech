@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const CourseCard = ({ title, rating, students, duration }) => (
-  <Card className="w-full h-20 mb-2">
+  <Card className="w-full bg-slate-200 h-20 mb-2">
     <CardContent className="flex p-4 h-full">
       <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
         <Users className="text-blue-500" size={20} />
@@ -13,11 +13,7 @@ const CourseCard = ({ title, rating, students, duration }) => (
       <div className="flex flex-col justify-between h-full flex-grow">
         <h3 className="text-sm font-medium">{title}</h3>
         <div className="flex items-center justify-between mt-1">
-          <div className="flex">
-            {[...Array(rating)].map((_, i) => (
-              <Star key={i} className="text-yellow-400" size={16} />
-            ))}
-          </div>
+          
           <div className="flex items-center text-gray-500 text-xs">
             <Users size={14} className="mr-1" />
             <span>{students}</span>
@@ -25,6 +21,11 @@ const CourseCard = ({ title, rating, students, duration }) => (
           <div className="flex items-center text-gray-500 text-xs">
             <Clock size={14} className="mr-1" />
             <span>{duration}</span>
+          </div>
+          <div>
+          <div className="flex justify-center items-center">
+<span className='text-sm text-gray-500'>{rating}</span>              <Star className="text-gray-500" size={16} />
+          </div>
           </div>
         </div>
       </div>

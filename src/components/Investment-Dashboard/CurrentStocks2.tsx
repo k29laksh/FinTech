@@ -12,8 +12,8 @@ const stocks = [
   { symbol: 'TWTR', name: 'Twitter Inc.', price: 5238.00, change: 5.90, logo: '/twitter-logo.jpg' },
 ];
 
-export default function CurrectStocks() {
-  const [selectedStock, setSelectedStock] = useState("BTC"); // Default stock symbol
+export default function CurrectStocks2() {
+  const [selectedStock, setSelectedStock] = useState({ name: 'NVIDIA Corp.', symbol: 'NVDA', price: 220.10, change: 1.00 }); // Default stock symbol
 
   return (
     <div className="gap-4 px-4">

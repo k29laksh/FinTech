@@ -5,6 +5,7 @@ import axios from "axios";
 import { IoSearchOutline } from "react-icons/io5";
 import CurrencyConverter from "./CurrencyConverter";
 import StockChart from "./StockChart";
+import CurrectStocks from "./CurrentStocks";
 const mockStockData = [
   { "name": "Colgate-Palmolive", "price": 120.36, "change": -120.36 },
   { "name": "Nestle India", "price": 189.36, "change": -189.36 },
@@ -28,6 +29,12 @@ const mockStockData = [
 
 
 export default function Dashboard() {
+  const [selectedStock, setSelectedStock] = useState({
+    symbol: "SPOT",
+    name: "Spotify Technology SA",
+    price: 12238.0,
+    change: -5.9,
+  },); // Default stock symbol
   const [stockData, setStockData] = useState(null);
   const [stocks, setStocks] = useState(mockStockData);
   const [searchTerm, setSearchTerm] = useState("");
@@ -100,7 +107,8 @@ export default function Dashboard() {
 
           {/* Stock Data Section */}
           <div className="mt-8 w-full">
-              <StockChart />
+            <CurrectStocks setSelectedStock={setSelectedStock}/>
+              <StockChart  stockSymbol={selectedStock}/>
           </div>
         </div>
       </div>

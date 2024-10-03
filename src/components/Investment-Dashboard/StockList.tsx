@@ -47,7 +47,7 @@ const StockList = ({ setSelectedStock }) => {
               <div 
                 key={index} 
                 className="flex justify-between items-center mb-1 hover:bg-white/10 px-2 py-2 rounded"
-                onClick={() => setSelectedStock(crypto.symbol)}  // Set selected stock when clicked
+                onClick={() => setSelectedStock(crypto)}  // Set the entire stock object
               >
                 <div className="flex items-center ">
                   <div className={`w-8 h-8 rounded-full mr-2 flex items-center justify-center text-white ${getColorClass(crypto.symbol)}`}>
@@ -74,6 +74,7 @@ const StockList = ({ setSelectedStock }) => {
     </Card>
   );
 };
+
 
 
 

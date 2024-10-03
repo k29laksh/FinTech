@@ -44,31 +44,31 @@ const Navbar = () => {
 
   return (
     <nav className="font-poppin fixed top-0 left-0 right-0 z-50 bg-black flex items-center justify-between text-white shadow h-[4rem] px-6 text-sm">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1">
        <Link href={'/'}>
        <Image
           src="/citi-logo.png"
           alt="Logo"
           width={50}
           height={60}
-          className=""
+          className="mr-3"
         /></Link>
         
       {/* </div> */}
         {/* <div className="flex space-x-4 items-center"> */}
            {/* <div>Home</div> */}
-           <Link href='/market/my-portfolio' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out">Market</Link>
-           <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Courses</div>
-           <Link href='/activity' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Activity</Link>           
-           <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Portfolio</div>         
+           <Link href='/market/my-portfolio' className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out">Market</Link>
+           <div className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out cursor-pointer">Courses</div>
+           <Link href='/activity' className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out cursor-pointer">Activity</Link>           
+           <div className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out cursor-pointer">Portfolio</div>         
         </div>
-      <div className="flex space-x-6 items-center">
-        <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Careers</div>
-        <Link href = '/news' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">News</Link>
-        <Link href='/about' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">About us</Link>
+      <div className="flex space-x-3 items-center">
+        <div className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out cursor-pointer">Careers</div>
+        <Link href = '/news' className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out cursor-pointer">News</Link>
+        <Link href='/about' className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out cursor-pointer">About us</Link>
         
         {!user ? (
-          <>
+          <div className="flex gap-6">
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger
                 onClick={() => setIsRegister(false)}
@@ -95,10 +95,10 @@ const Navbar = () => {
                 </DialogHeader>
               </DialogContent>
             </Dialog>
-          </>
+          </div>
         ) : (
           <div className="flex items-center space-x-4">
-            <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">
+            <div className="hover:bg-white/20 px-3 py-2 rounded transition duration-300 ease-in-out cursor-pointer">
                 Dashboard
             </div>
                 <div className="w-9 h-9 rounded-full flex justify-center items-center bg-slate-200 text-gray-800">{user?.user?.name?.charAt(0)?.toUpperCase()}</div>

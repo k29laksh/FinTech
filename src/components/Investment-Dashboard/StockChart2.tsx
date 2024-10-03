@@ -60,7 +60,7 @@ const StockChart = ({stockSymbol}) => {
 
         // Fetch stock data from Alpha Vantage
         const stockResponse = await axios.get(
-          `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol}&interval=5min&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
+          `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol.symbol}&interval=5min&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
         );
 
         const timeSeries = stockResponse.data["Time Series (5min)"];
@@ -150,12 +150,15 @@ const StockChart = ({stockSymbol}) => {
       {/* Bitcoin Section */}
       <div className="flex justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Bitcoin (BTC)</h2>
+          <h2 className="text-2xl font-bold">{stockSymbol?.name} ({stockSymbol?.symbol})</h2>
           <div className="flex items-center py-4 gap-8">
-            <h2 className="text-xl font-semibold">$42715.35</h2>
-            <p className="text-red-400 px-2 py-1 text-sm bg-red-400/10 rounded-full">
-              -20.9%
-            </p>
+            <h2 className="text-xl font-semibold">${stockSymbol?.price}</h2>
+            <div className="text-right">
+                  
+                  <div className={stockSymbol.change >= 0 ? "text-green-400 px-3 py-1 text-sm bg-green-400/10 rounded-full" : "text-red-400 px-3 py-1 text-sm bg-red-400/10 rounded-full"}>
+                    {stockSymbol.change >= 0 ? '+' : ''}{stockSymbol.change}%
+                  </div>
+                </div>
           </div>
         </div>
         <div className="flex gap-6">
