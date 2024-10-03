@@ -1,0 +1,46 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .btn-news {
+    margin-bottom: 20px;
+  }
+  
+  .loading {
+    font-size: 18px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .news-article {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+  
+  .news-title {
+    font-size: 18px;
+  }
+  
+  .news-description {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .news-link {
+    color: #0070f3;
+    text-decoration: none;
+  }
+  
+  .news-link:hover {
+    text-decoration: underline;
+  }
+  

@@ -64,7 +64,7 @@ const Navbar = () => {
         </div>
       <div className="flex space-x-6 items-center">
         <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">Careers</div>
-        <div className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">News</div>
+        <Link href = '/news' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">News</Link>
         <Link href='/about' className="hover:bg-gray-500 px-2 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">About us</Link>
         
         {!user ? (

@@ -97,6 +97,17 @@
       font-weight: 400;
       font-style: 1;
     }
+    .btn-news {
+      padding: 10px 20px;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-news:hover {
+      background-color: #005bb5;
+    }
     
 
   }

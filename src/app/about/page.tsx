@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const InfoCard = ({ title = false, content= false, imageSrc= false, imageAlt= false, isReversed = false }) => {
+const InfoCard = ({ title = false, content = false, imageSrc = false, imageAlt = false, isReversed = false }) => {
   return (
     <div className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} bg-yellow-100 rounded-lg overflow-hidden`}>
       <div className="md:w-1/2 p-6">
@@ -73,17 +73,75 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-9 px-3 py-12">
-      {sections.map((section, index) => (
-        <InfoCard
-          key={index}
-          title={section.title}
-          content={section.content}
-          imageSrc={section.imageSrc}
-          imageAlt={section.imageAlt}
-          isReversed={index % 2 !== 0}
-        />
-      ))}
+    <div className="flex flex-col min-h-screen">
+      {/* Main content */}
+      <div className="flex-grow">
+        <div className="flex flex-col gap-9 px-3 py-12">
+          {sections.map((section, index) => (
+            <InfoCard
+              key={index}
+              title={section.title}
+              content={section.content}
+              imageSrc={section.imageSrc}
+              imageAlt={section.imageAlt}
+              isReversed={index % 2 !== 0}
+            />
+          ))}
+        </div>
+      </div>
+      
+      {/* Footer */}
+      <footer className="relative z-10 bg-blue-900 text-white py-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Solutions</h2>
+              <div className="grid grid-cols-2 gap-2">
+                <ul className="space-y-2">
+                  <li className="text-center">Asset Management</li>
+                  <li className="text-center">Investment Banking</li>
+                  <li className="text-center">AI-Based Financial Advice</li>
+                </ul>
+                <ul className="space-y-2">
+                  <li className="text-center">Market Trends</li>
+                  <li className="text-center">Stock Prediction</li>
+                  <li className="text-center">Wealth Management</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Connect With Us Column */}
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Connect With Us</h2>
+              <ul className="space-y-2">
+                <li className="text-center">Client Login</li>
+                <li className="text-center">Alumni Network</li>
+              </ul>
+            </div>
+
+            {/* Careers Column */}
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Careers</h2>
+              <ul className="space-y-2">
+                <li className="text-center">Internships</li>
+                <li className="text-center">Full-Time Roles</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Copyright and Links */}
+          <div className="border-t border-blue-800 pt-6 mt-6">
+            <p className="text-sm text-center">&copy; 2024 Your Company Name. All rights reserved.</p>
+            <div className="flex justify-center space-x-4 mt-2">
+              <a href="#" className="text-blue-300 hover:text-blue-200">Privacy Policy</a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">Terms of Service</a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">Contact Us</a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">Instagram</a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
