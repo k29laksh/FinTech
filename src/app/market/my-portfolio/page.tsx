@@ -1,6 +1,8 @@
 import Dashboard from '@/components/Investment Cards/BalanceCard'
 import InvestmentSidebar from '@/components/Sidebars/Investment'
 import React from 'react'
+import '@/css/scrollbar.css'
+
 
 const Page = () => {
   return (

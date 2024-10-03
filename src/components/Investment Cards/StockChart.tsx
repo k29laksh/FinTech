@@ -103,7 +103,7 @@ const StockChart = () => {
   const fetchSuggestions = async (query) => {
     try {
       const response = await axios.get(
-        `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=IOWC6NF6XQ8TVUPJ`
+        `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
       );
       const suggestedStocks = response.data.bestMatches.map((stock) => ({
         symbol: stock["1. symbol"],

@@ -60,7 +60,7 @@ const StockChart = ({stockSymbol}) => {
 
         // Fetch stock data from Alpha Vantage
         const stockResponse = await axios.get(
-          `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol}&interval=5min&apikey=IW6TBX85KQJYB68P`
+          `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol}&interval=5min&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
         );
 
         const timeSeries = stockResponse.data["Time Series (5min)"];

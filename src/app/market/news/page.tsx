@@ -1,21 +1,22 @@
-import CurrectStocks from '@/components/Investment-Dashboard/CurrentStocks'
+import Dashboard from '@/components/Investment Cards/BalanceCard'
 import InvestmentSidebar from '@/components/Sidebars/Investment'
 import React from 'react'
 import '@/css/scrollbar.css'
-const page = () => {
+import StockNews from '@/components/Investment_news/StockNews'
+
+
+const Page = () => {
   return (
     <div className="flex h-[100vh]">
       {/* Sidebar - Fixed Position */}
       <InvestmentSidebar />
 
       {/* Main Content - Scrollable */}
-      <div className="flex-1 overflow-y-auto mt-[4rem]">
-      <CurrectStocks/>
-
-      
+      <div className="flex-1 overflow-y-auto">
+        <StockNews />
       </div>
     </div>
   )
 }
 
-export default page
+export default Page

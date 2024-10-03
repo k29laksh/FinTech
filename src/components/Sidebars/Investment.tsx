@@ -19,8 +19,8 @@ const InvestmentSidebar = () => {
   const navItems = [
     { icon: VscGraph, label: "My-Portfolio", path: "/market/my-portfolio" },
     { icon: LuLayoutDashboard, label: "Dashboard", path: "/market/dashboard" },
-    { icon: AiOutlineBook, label: "Learning", path: "/learning" },
-    { icon: MdOutlineHistory, label: "History", path: "/history" },
+    { icon: AiOutlineBook, label: "Courses", path: "/market/courses" },
+    { icon: MdOutlineHistory, label: "News", path: "/market/news" },
     { icon: AiOutlineSetting, label: "Settings", path: "/settings" },
     { icon: AiOutlineQuestionCircle, label: "Help and Support", path: "/help" },
   ];
