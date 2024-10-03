@@ -1,9 +1,10 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpIcon, ArrowDownIcon } from "lucide-react";
 import { FaApple } from "react-icons/fa";
 import StockList from './StockList';
-import StockChart from '../Investment Cards/StockChart';
+import StockChart2 from './StockChart2';
 const stocks = [
   { symbol: 'AAPL', name: 'Apple Inc.', price: 15238.00, change: 5.90, logo: '/apple-logo.png' },
   { symbol: 'GOGL', name: 'Google Corp', price: 6842.00, change: 5.90, logo: '/google-logo.png' },
@@ -12,6 +13,8 @@ const stocks = [
 ];
 
 export default function CurrectStocks() {
+  const [selectedStock, setSelectedStock] = useState("BTC"); // Default stock symbol
+
   return (
     <div className="gap-4 px-4">
         <h2 className="text-xl text-white font-semibold">
@@ -47,12 +50,12 @@ export default function CurrectStocks() {
 
 <div className='flex  justify-between'>
        <div className='w-[25%]'>
-       <StockList/>
+       <StockList setSelectedStock={setSelectedStock} />
 
        </div>
 
        <div className='w-[70%] pr-10'>
-       <StockChart/>
+       <StockChart2 stockSymbol={selectedStock}/>
        </div>
       </div>
     </div>

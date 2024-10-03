@@ -20,7 +20,7 @@ const stocks = [
   { name: 'NVIDIA Corp.', symbol: 'NVDA', price: 220.10, change: 1.00 },
 ];
 
-const StockList = () => {
+const StockList = ({ setSelectedStock }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredStocks = stocks.filter(stock => 
@@ -41,10 +41,14 @@ const StockList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full mb-4 p-2 bg-white/15 text-white outline-none rounded"
         />
-        <ScrollArea className="h-[465px] bg-white/10 w-full rounded-md  px-3 py-2 pr-4 cursor-pointer">
+        <ScrollArea className="h-[465px] bg-white/10 w-full rounded-md px-3 py-2 pr-4 cursor-pointer">
           {filteredStocks.length > 0 ? (
             filteredStocks.map((crypto, index) => (
-              <div key={index} className="flex justify-between items-center mb-1 hover:bg-white/10 px-2 py-2 rounded">
+              <div 
+                key={index} 
+                className="flex justify-between items-center mb-1 hover:bg-white/10 px-2 py-2 rounded"
+                onClick={() => setSelectedStock(crypto.symbol)}  // Set selected stock when clicked
+              >
                 <div className="flex items-center ">
                   <div className={`w-8 h-8 rounded-full mr-2 flex items-center justify-center text-white ${getColorClass(crypto.symbol)}`}>
                     {crypto.symbol.charAt(0)}
@@ -70,6 +74,8 @@ const StockList = () => {
     </Card>
   );
 };
+
+
 
 const getColorClass = (symbol) => {
   const colors = {
