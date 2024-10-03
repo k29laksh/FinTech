@@ -5,12 +5,15 @@ import TopComponent from "./TopComponent";
 import MiddleComponent from "./MiddleComponent";
 import ExpenseDashboard from "./ExpenseDashboard";
 import BudgetGoalComponent from "./BudgetGoalComponent";
+import InvestmentSidebar from "@/components/Sidebars/Investment";
 
 const page = () => {
   return (
-    <div className="min-h-[100vh-5rem] w-full flex text-white">
+   <div>
+     <div className="flex h-[100vh]">
+      {/* Sidebar - Fixed Position */}
       <ActivitySidebar />
-      <div className="w-full">
+      <div className="flex-1 overflow-y-auto ">
         <TopComponent />
         <MiddleComponent />
         <div className="flex gap-4">
@@ -23,6 +26,7 @@ const page = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

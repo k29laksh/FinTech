@@ -40,10 +40,10 @@ const TopComponent = () => {
   const [selectedAccount, setSelectedAccount] = useState<Account>(accounts[0]);
   return (
       <div className="flex flex-col ml-8 mt-16">
-        <h1 className="text-2xl font-poppins">
+        <h1 className="text-2xl font-poppins text-white">
           Welcome Back, <span className="font-semibold">Aakanksha</span>
         </h1>
-        <h2 className="text-lg font-poppins">
+        <h2 className="text-lg font-poppins text-gray-100">
           Save smarter, spend wiser with real-time advice
         </h2>
         <div className="flex gap-4 w-full pr-4 pt-4">
