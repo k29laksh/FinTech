@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-export default function SellForm({ stockName, stockPrice, onClose }) {
+export default function SellForm({ stockName, stockPrice, onClose }:any) {
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold">{stockName}</h2>

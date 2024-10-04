@@ -29,13 +29,6 @@ const googleLogin = async () => {
   await signIn("google");
 };
 
-const getSession=async()=>{
-  const session=await auth()
-      const user=session?.userData;
-      console.log(user)
-
-      return user;
-}
 
 const signup = async (formData: FormData) => {
   const name = formData.get("name") as string;
@@ -64,4 +57,4 @@ const fetchAllUsers = async () => {
   return users;
 };
 
-export { signup, login, fetchAllUsers, googleLogin, getSession };
+export { signup, login, fetchAllUsers, googleLogin };

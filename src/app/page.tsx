@@ -1,6 +1,7 @@
 import "./globals.css";
 import React from "react";
 import "font-awesome/css/font-awesome.css";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -82,10 +83,12 @@ export default function Home() {
               key={index}
               className="bg-gray-800 rounded-lg overflow-hidden flex flex-col h-96 transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-lg"
             >
-              <img
+              <Image
                 src={feature.img}
                 alt={`Feature ${index + 1}`}
                 className="w-full object-cover h-64"
+                width={256}
+                height={256}
               />
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="font-bold text-lg">{feature.title}</h3>
@@ -119,7 +122,7 @@ export default function Home() {
               name: "David L.",
               role: "Small Business Owner",
               testimonial:
-                "As someone who’s always been hesitant about international investments, Citi's global investment opportunities feature gave me the confidence to diversify. The platform’s insights into global markets, combined with real-time risk assessments, have been a game-changer in my investment strategy.",
+                "As someone who's always been hesitant about international investments, Citi's global investment opportunities feature gave me the confidence to diversify. The platform's insights into global markets, combined with real-time risk assessments, have been a game-changer in my investment strategy.",
             },
             {
               name: "Emily R.",
@@ -139,7 +142,7 @@ export default function Home() {
               className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out"
             >
               <p className="text-sm text-gray-300 mb-4">
-                "{testimonial.testimonial}"
+                {testimonial.testimonial}
               </p>
               <div className="text-right">
                 <h3 className="font-bold">{testimonial.name}</h3>
@@ -191,57 +194,70 @@ export default function Home() {
       </div>
 
       <div className="relative z-10 bg-blue-900 text-white py-8">
-  <div className="container mx-auto px-4">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
-      
-      <div>
-        <h2 className="text-2xl font-bold mb-4 text-center">Solutions</h2>
-        <div className="grid grid-cols-2 gap-2">
-          <ul className="space-y-2">
-            <li className="text-center">Asset Management</li>
-            <li className="text-center">Investment Banking</li>
-            <li className="text-center">AI-Based Financial Advice</li>
-          </ul>
-          <ul className="space-y-2">
-            <li className="text-center">Market Trends</li>
-            <li className="text-center">Stock Prediction</li>
-            <li className="text-center">Wealth Management</li>
-          </ul>
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Solutions</h2>
+              <div className="grid grid-cols-2 gap-2">
+                <ul className="space-y-2">
+                  <li className="text-center">Asset Management</li>
+                  <li className="text-center">Investment Banking</li>
+                  <li className="text-center">AI-Based Financial Advice</li>
+                </ul>
+                <ul className="space-y-2">
+                  <li className="text-center">Market Trends</li>
+                  <li className="text-center">Stock Prediction</li>
+                  <li className="text-center">Wealth Management</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Connect With Us Column */}
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">
+                Connect With Us
+              </h2>
+              <ul className="space-y-2">
+                <li className="text-center">Client Login</li>
+                <li className="text-center">Alumni Network</li>
+              </ul>
+            </div>
+
+            {/* Careers Column */}
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Careers</h2>
+              <ul className="space-y-2">
+                <li className="text-center">Internships</li>
+                <li className="text-center">Full-Time Roles</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Copyright and Links */}
+          <div className="border-t border-blue-800 pt-6 mt-6">
+            <p className="text-sm text-center">
+              &copy; 2024 Your Company Name. All rights reserved.
+            </p>
+            <div className="flex justify-center space-x-4 mt-2">
+              <a href="#" className="text-blue-300 hover:text-blue-200">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">
+                Terms of Service
+              </a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">
+                Contact Us
+              </a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">
+                Instagram
+              </a>
+              <a href="#" className="text-blue-300 hover:text-blue-200">
+                LinkedIn
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Connect With Us Column */}
-      <div>
-        <h2 className="text-2xl font-bold mb-4 text-center">Connect With Us</h2>
-        <ul className="space-y-2">
-          <li className="text-center">Client Login</li>
-          <li className="text-center">Alumni Network</li>
-        </ul>
-      </div>
-
-      {/* Careers Column */}
-      <div>
-        <h2 className="text-2xl font-bold mb-4 text-center">Careers</h2>
-        <ul className="space-y-2">
-          <li className="text-center">Internships</li>
-          <li className="text-center">Full-Time Roles</li>
-        </ul>
-      </div>
-    </div>
-
-    {/* Copyright and Links */}
-    <div className="border-t border-blue-800 pt-6 mt-6">
-      <p className="text-sm text-center">&copy; 2024 Your Company Name. All rights reserved.</p>
-      <div className="flex justify-center space-x-4 mt-2">
-        <a href="#" className="text-blue-300 hover:text-blue-200">Privacy Policy</a>
-        <a href="#" className="text-blue-300 hover:text-blue-200">Terms of Service</a>
-        <a href="#" className="text-blue-300 hover:text-blue-200">Contact Us</a>
-        <a href="#" className="text-blue-300 hover:text-blue-200">Instagram</a>
-        <a href="#" className="text-blue-300 hover:text-blue-200">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-</div>
     </div>
   );
 }

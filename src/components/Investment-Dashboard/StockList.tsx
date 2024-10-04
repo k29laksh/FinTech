@@ -18,9 +18,9 @@ const stocks = [
   { name: 'Meta Platforms Inc.', symbol: 'META', price: 330.70, change: 0.05 },
   { name: 'Polkadot', symbol: 'DOT', price: 7.23, change: -0.10 },
   { name: 'NVIDIA Corp.', symbol: 'NVDA', price: 220.10, change: 1.00 },
-];
+] ;
 
-const StockList = ({ setSelectedStock }) => {
+const StockList = ({ setSelectedStock }:any) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredStocks = stocks.filter(stock => 
@@ -31,7 +31,7 @@ const StockList = ({ setSelectedStock }) => {
   return (
     <Card className="w-[350px] text-white border-none bg-black">
       <CardHeader>
-        <CardTitle className="text-white">Today's Stock Prices</CardTitle>
+        <CardTitle className="text-white">Today&apos;s Stock Prices</CardTitle>
       </CardHeader>
       <CardContent>
         <input
@@ -43,7 +43,7 @@ const StockList = ({ setSelectedStock }) => {
         />
         <ScrollArea className="h-[465px] bg-white/10 w-full rounded-md px-3 py-2 pr-4 cursor-pointer">
           {filteredStocks.length > 0 ? (
-            filteredStocks.map((crypto, index) => (
+            filteredStocks.map((crypto :any, index:any) => (
               <div 
                 key={index} 
                 className="flex justify-between items-center mb-1 hover:bg-white/10 px-2 py-2 rounded"
@@ -78,7 +78,7 @@ const StockList = ({ setSelectedStock }) => {
 
 
 
-const getColorClass = (symbol) => {
+const getColorClass = (symbol: keyof typeof colors): string => {
   const colors = {
     BTC: "bg-orange-600",
     ETH: "bg-blue-600",
@@ -87,8 +87,10 @@ const getColorClass = (symbol) => {
     BNB: "bg-yellow-600",
     AVAX: "bg-red-600",
     DOT: "bg-pink-600",
-  };
+  } as const;
+
   return colors[symbol] || "bg-gray-600";
 };
+
 
 export default StockList;

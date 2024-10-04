@@ -1,5 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
+"use client"
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FcGoogle } from "react-icons/fc";
@@ -9,21 +9,40 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { login, signup } from "@/action/user";
 import { useFormStatus } from "react-dom";
+import { Session } from "next-auth";
+import { FormComponentProps } from "@/types/FormComponent";
 
-const FormComponent = ({ isRegister,setIsRegister, onSignInComplete,handleRegister }) => {
+
+
+interface User {
+  name?: string;
+  email?: string;
+}
+
+const FormComponent = ({
+  isRegister,
+  setIsRegister,
+  onSignInComplete,
+  handleRegister,
+}: FormComponentProps) => {
   const { pending } = useFormStatus();
-
   const router = useRouter();
-  const [user, setUser] = useState(null);
+
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const session = await getSession();
-        setUser(session?.user);
+        const session: Session | null = await getSession();
         if (session?.user) {
-          onSignInComplete(); // Close the dialog after sign-in
+          setUser({
+            name: session.user.name ?? undefined,
+            email: session.user.email ?? undefined,
+          });
+          onSignInComplete();
           router.push("/");
+        } else {
+          setUser(null);
         }
       } catch (error) {
         console.error("Error fetching session:", error);
@@ -31,24 +50,23 @@ const FormComponent = ({ isRegister,setIsRegister, onSignInComplete,handleRegist
     };
 
     fetchSession();
-  }, [router]);
-
-  const handleSubmit = async (event) => {
+  }, [router, onSignInComplete]);
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.target as HTMLFormElement);
     const action = isRegister ? signup : login;
 
     try {
       await action(formData);
       if (isRegister) {
         toast.success("Account created successfully! Please log in.");
-        setIsRegister(false)
+        setIsRegister(false);
       } else {
         toast.success("Logged in successfully!");
         onSignInComplete(); // Close the dialog after successful login
       }
       router.refresh();
-    } catch (error) {
+    } catch (error:any) {
       toast.error(error.message);
     }
   };

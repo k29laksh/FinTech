@@ -1,11 +1,35 @@
-"use client"
+"use client";
 import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const CourseCard = ({ title, duration, progress, rating }) => (
+// Define the Course type
+interface Course {
+  title: string;
+  duration: number; // Duration in hours
+  progress: number; // Progress percentage
+  rating: number;   // Rating out of 5
+}
+
+interface ProgressProps {
+  value: number; // Progress value as a number
+  max?: number; // Optional max value, defaults to 100
+  className?: string; // Additional class names for the progress container
+  indicatorClassName?: string; // Additional class names for the progress indicator
+}
+// Define props for CourseCard
+interface CourseCardProps {
+  title: string;
+  duration: number;
+  progress: number;
+  rating: number;
+}
+
+
+// CourseCard Component
+const CourseCard: React.FC<CourseCardProps> = ({ title, duration, progress, rating }) => (
   <Card className="w-72 bg-slate-300 flex-shrink-0">
     <CardHeader className="pb-2">
       <CardTitle className="text-lg">{title}</CardTitle>
@@ -35,11 +59,13 @@ const CourseCard = ({ title, duration, progress, rating }) => (
   </Card>
 );
 
-const CourseCards = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const scrollContainerRef = useRef(null);
+// CourseCards Component
+const CourseCards: React.FC = () => {
+  const [scrollPosition, setScrollPosition] = useState<number>(0); // State to track scroll position
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null); // Ref for the scroll container
 
-  const courses = [
+  // Define the courses array with typed Course objects
+  const courses: Course[] = [
     { title: "Financial Goals", duration: 2, progress: 46, rating: 4 },
     { title: "Tax Planning", duration: 4, progress: 78, rating: 4 },
     { title: "Investment Strategies", duration: 3, progress: 25, rating: 5 },
@@ -48,7 +74,8 @@ const CourseCards = () => {
     { title: "Estate Planning", duration: 4, progress: 15, rating: 5 },
   ];
 
-  const scroll = (direction) => {
+  // Function to scroll the container left or right
+  const scroll = (direction: 'left' | 'right') => {
     const container = scrollContainerRef.current;
     if (container) {
       const scrollAmount = direction === 'left' ? -300 : 300;
@@ -78,12 +105,16 @@ const CourseCards = () => {
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <Button 
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 hover:bg-gray-700"
-          onClick={() => scroll('right')}
-          disabled={scrollPosition >= scrollContainerRef.current?.scrollWidth - scrollContainerRef.current?.clientWidth}
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 hover:bg-gray-700"
+        onClick={() => scroll('right')}
+        disabled={
+          scrollPosition >=
+          (scrollContainerRef.current?.scrollWidth || 0) - 
+          (scrollContainerRef.current?.clientWidth || 0)
+        }
+      >
+        <ChevronRight className="h-4 w-4" />
+      </Button>
       </div>
     </div>
   );

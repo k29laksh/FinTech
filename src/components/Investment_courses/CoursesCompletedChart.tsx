@@ -23,7 +23,7 @@ const CoursesCompletedChart = () => {
     ],
   };
 
-  const options = {
+  const options:any = {
     cutout: '70%', // Creates the donut effect
     plugins: {
       legend: {

@@ -5,11 +5,10 @@ import { Slider } from "@/components/ui/slider";
 import { Star } from "lucide-react";
 
 const BudgetGoalComponent = () => {
-  const [sliderValue, setSliderValue] = useState(30); // Starting value (0 - 100)
-  const minValue = 1000; // Minimum value for your slider
-  const maxValue = 2000; // Maximum value for your slider
+  const [sliderValue, setSliderValue] = useState(30); 
+  const minValue = 1000;
+  const maxValue = 2000; 
 
-  // This will calculate the current value based on the slider's position.
   const currentValue = minValue + (sliderValue / 100) * (maxValue - minValue);
 
   return (
@@ -29,7 +28,6 @@ const BudgetGoalComponent = () => {
           </span>
         </div>
 
-        {/* Normal left-to-right slider */}
         <Slider
           value={[sliderValue]}
           onValueChange={(value) => setSliderValue(value[0])}

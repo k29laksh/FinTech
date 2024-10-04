@@ -7,26 +7,25 @@ import CurrencyConverter from "./CurrencyConverter";
 import StockChart from "./StockChart";
 import CurrectStocks from "./CurrentStocks";
 const mockStockData = [
-  { "name": "Colgate-Palmolive", "price": 120.36, "change": -120.36 },
-  { "name": "Nestle India", "price": 189.36, "change": -189.36 },
-  { "name": "P&G Hygiene", "price": 92.50, "change": 92.50 },
-  { "name": "MRF", "price": 197.50, "change": 197.50 },
-  { "name": "IBM", "price": 250.00, "change": -150.00 },
-  { "name": "Tata Motors", "price": 350.00, "change": 100.00 },
-  { "name": "HDFC Bank", "price": 450.00, "change": 50.00 },
-  { "name": "Infosys", "price": 800.00, "change": 200.00 },
-  { "name": "Apple", "price": 150.25, "change": 75.25 },
-  { "name": "Reliance Industries", "price": 1120.45, "change": -120.45 },
-  { "name": "Samsung", "price": 920.75, "change": 20.75 },
-  { "name": "Tesla", "price": 720.90, "change": -180.90 },
-  { "name": "Google", "price": 2000.45, "change": 500.45 },
-  { "name": "Microsoft", "price": 1500.75, "change": 250.75 },
-  { "name": "Amazon", "price": 3000.10, "change": -100.10 },
-  { "name": "Wipro", "price": 320.80, "change": -20.80 },
-  { "name": "Mahindra & Mahindra", "price": 700.25, "change": 100.25 },
-  { "name": "Bajaj Finance", "price": 1700.50, "change": 300.50 },
+  { name: "Colgate-Palmolive", price: 120.36, change: -120.36 },
+  { name: "Nestle India", price: 189.36, change: -189.36 },
+  { name: "P&G Hygiene", price: 92.5, change: 92.5 },
+  { name: "MRF", price: 197.5, change: 197.5 },
+  { name: "IBM", price: 250.0, change: -150.0 },
+  { name: "Tata Motors", price: 350.0, change: 100.0 },
+  { name: "HDFC Bank", price: 450.0, change: 50.0 },
+  { name: "Infosys", price: 800.0, change: 200.0 },
+  { name: "Apple", price: 150.25, change: 75.25 },
+  { name: "Reliance Industries", price: 1120.45, change: -120.45 },
+  { name: "Samsung", price: 920.75, change: 20.75 },
+  { name: "Tesla", price: 720.9, change: -180.9 },
+  { name: "Google", price: 2000.45, change: 500.45 },
+  { name: "Microsoft", price: 1500.75, change: 250.75 },
+  { name: "Amazon", price: 3000.1, change: -100.1 },
+  { name: "Wipro", price: 320.8, change: -20.8 },
+  { name: "Mahindra & Mahindra", price: 700.25, change: 100.25 },
+  { name: "Bajaj Finance", price: 1700.5, change: 300.5 },
 ];
-
 
 export default function Dashboard() {
   const [selectedStock, setSelectedStock] = useState({
@@ -34,16 +33,18 @@ export default function Dashboard() {
     name: "Spotify Technology SA",
     price: 12238.0,
     change: -5.9,
-  },); // Default stock symbol
+  }); // Default stock symbol
   const [stockData, setStockData] = useState(null);
   const [stocks, setStocks] = useState(mockStockData);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState("all"); // all, profit, loss
+  const [filterType, setFilterType] = useState("all");
 
   // Filter stocks based on search term and filter type
   const filteredStocks = stocks
-    .filter(stock => stock.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    .filter(stock => {
+    .filter((stock) =>
+      stock.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((stock) => {
       if (filterType === "profit") return stock.change > 0;
       if (filterType === "loss") return stock.change < 0;
       return true; // For "all"
@@ -107,68 +108,85 @@ export default function Dashboard() {
 
           {/* Stock Data Section */}
           <div className="mt-8 w-full">
-            <CurrectStocks setSelectedStock={setSelectedStock}/>
-              <StockChart  stockSymbol={selectedStock}/>
+            <CurrectStocks setSelectedStock={setSelectedStock} />
+            <StockChart stockSymbol={selectedStock} />
           </div>
         </div>
       </div>
 
       {/* Right Section */}
       <div className="h-[calc(100vh-4rem)] w-[30%] bg-black text-white flex flex-col">
-      {/* Fixed Search and Filter Section */}
-      <div className="p-8 pb-4">
-        {/* Search Bar */}
-        <div className="flex justify-between gap-6 mb-4">
-          <h2 className="text-xl text-gray-100 font-semibold">Transactions</h2>
-          <div className="flex items-center gap-1">
-            <IoSearchOutline className="text-gray-300" size={20} />
-            <input
-              type="text"
-              placeholder="Search"
-              className="bg-transparent w-full text-sm text-white border-b outline-none"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+        {/* Fixed Search and Filter Section */}
+        <div className="p-8 pb-4">
+          {/* Search Bar */}
+          <div className="flex justify-between gap-6 mb-4">
+            <h2 className="text-xl text-gray-100 font-semibold">
+              Transactions
+            </h2>
+            <div className="flex items-center gap-1">
+              <IoSearchOutline className="text-gray-300" size={20} />
+              <input
+                type="text"
+                placeholder="Search"
+                className="bg-transparent w-full text-sm text-white border-b outline-none"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Filter Buttons */}
+          <div className="flex gap-6 text-sm">
+            <button
+              onClick={() => setFilterType("all")}
+              className={`py-1 px-4 rounded ${
+                filterType === "all" ? "bg-white/95 text-black" : "bg-white/15"
+              }`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setFilterType("profit")}
+              className={`py-1 px-4 rounded ${
+                filterType === "profit"
+                  ? "bg-white/95 text-black"
+                  : "bg-white/15"
+              }`}
+            >
+              Profit
+            </button>
+            <button
+              onClick={() => setFilterType("loss")}
+              className={`py-1 px-4 rounded ${
+                filterType === "loss" ? "bg-white/95 text-black" : "bg-white/15"
+              }`}
+            >
+              Loss
+            </button>
           </div>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex gap-6 text-sm">
-          <button
-            onClick={() => setFilterType("all")}
-            className={`py-1 px-4 rounded ${filterType === "all" ? "bg-white/95 text-black" : "bg-white/15"}`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setFilterType("profit")}
-            className={`py-1 px-4 rounded ${filterType === "profit" ? "bg-white/95 text-black" : "bg-white/15"}`}
-          >
-            Profit
-          </button>
-          <button
-            onClick={() => setFilterType("loss")}
-            className={`py-1 px-4 rounded ${filterType === "loss" ? "bg-white/95 text-black" : "bg-white/15"}`}
-          >
-            Loss
-          </button>
+        {/* Scrollable Transaction History */}
+        <div className="flex-1 overflow-y-auto px-8 pb-8">
+          <div className="flex flex-col gap-3">
+            {filteredStocks.map((stock, index) => (
+              <Card
+                key={index}
+                className="py-4 px-4 bg-white/10 flex justify-between items-center border-none"
+              >
+                <h3 className="text-white">{stock.name}</h3>
+                <p
+                  className={
+                    stock.change > 0 ? "text-green-500" : "text-red-500"
+                  }
+                >
+                  {stock.change > 0 ? "+" : ""} {stock.change.toFixed(2)}
+                </p>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Scrollable Transaction History */}
-      <div className="flex-1 overflow-y-auto px-8 pb-8">
-        <div className="flex flex-col gap-3">
-          {filteredStocks.map((stock, index) => (
-            <Card key={index} className="py-4 px-4 bg-white/10 flex justify-between items-center border-none">
-              <h3 className="text-white">{stock.name}</h3>
-              <p className={stock.change > 0 ? "text-green-500" : "text-red-500"}>
-                {stock.change > 0 ? "+" : ""} {stock.change.toFixed(2)}
-              </p>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </div>
     </div>
   );
 }

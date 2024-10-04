@@ -11,7 +11,6 @@ const page = () => {
   return (
    <div>
      <div className="flex h-[100vh]">
-      {/* Sidebar - Fixed Position */}
       <ActivitySidebar />
       <div className="flex-1 overflow-y-auto ">
         <TopComponent />

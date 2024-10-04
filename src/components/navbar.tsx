@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dialog";
 import FormComponent from "./auth/FormComponent";
 import { auth } from "@/auth";
-import { getSession } from "@/action/user";
 import { useSession } from "next-auth/react";
 
 const Navbar = () => {

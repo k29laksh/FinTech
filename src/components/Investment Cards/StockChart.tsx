@@ -30,7 +30,7 @@ ChartJS.register(
   Legend
 );
 
-const StockChart = ({stockSymbol}) => {
+const StockChart = ({ stockSymbol }:any) => {
   const [currency, setCurrency] = useState("INR"); // Default currency
   const [stockData, setStockData] = useState([]); // Stock data points (prices)
   const [labels, setLabels] = useState([]); // X-axis labels (timestamps)
@@ -73,8 +73,8 @@ const StockChart = ({stockSymbol}) => {
           return;
         }
 
-        const stockPrices = [];
-        const stockLabels = [];
+        const stockPrices:any = [] ;
+        const stockLabels:any = [];
 
         // Populate the stock data and labels for the chart
         for (let time in timeSeries) {
@@ -143,22 +143,30 @@ const StockChart = ({stockSymbol}) => {
         beginAtZero: false,
       },
     },
-  };
+  } as Object;
 
   return (
     <div className="p-6 bg-white/10 text-white rounded-lg shadow-md w-full h-auto">
       {/* Bitcoin Section */}
       <div className="flex justify-between">
         <div>
-          <h2 className="text-2xl font-bold">{stockSymbol?.name} ({stockSymbol?.symbol})</h2>
+          <h2 className="text-2xl font-bold">
+            {stockSymbol?.name} ({stockSymbol?.symbol})
+          </h2>
           <div className="flex items-center py-4 gap-8">
             <h2 className="text-xl font-semibold">${stockSymbol?.price}</h2>
             <div className="text-right">
-                  
-                  <div className={stockSymbol.change >= 0 ? "text-green-400 px-3 py-1 text-sm bg-green-400/10 rounded-full" : "text-red-400 px-3 py-1 text-sm bg-red-400/10 rounded-full"}>
-                    {stockSymbol.change >= 0 ? '+' : ''}{stockSymbol.change}%
-                  </div>
-                </div>
+              <div
+                className={
+                  stockSymbol.change >= 0
+                    ? "text-green-400 px-3 py-1 text-sm bg-green-400/10 rounded-full"
+                    : "text-red-400 px-3 py-1 text-sm bg-red-400/10 rounded-full"
+                }
+              >
+                {stockSymbol.change >= 0 ? "+" : ""}
+                {stockSymbol.change}%
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex gap-6">

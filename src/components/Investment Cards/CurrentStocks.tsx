@@ -2,6 +2,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpIcon, ArrowDownIcon } from "lucide-react";
+import Image from "next/image";
 
 const stocks = [
   {
@@ -34,7 +35,7 @@ const stocks = [
   },
 ];
 
-export default function CurrectStocks({ setSelectedStock }) {
+export default function CurrectStocks({ setSelectedStock }:any) {
   return (
     <div className="gap-4">
       <h2 className="text-xl text-white font-semibold">My Stocks</h2>
@@ -47,15 +48,17 @@ export default function CurrectStocks({ setSelectedStock }) {
           >
             <CardContent className="px-4 py-3">
               <div className="flex space-x-2 mb-4">
-               <div>
-               <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 mt-1">
-                  <img
-                    src={stock.logo}
-                    alt={`${stock.name} logo`}
-                    className="w-full h-full object-cover"
-                  />
+                <div>
+                  <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 mt-1">
+                    <Image
+                      src={stock.logo}
+                      alt={`${stock.name} logo`}
+                      className="w-full h-full object-cover"
+                      width={150}  // Specify the width
+                       height={50}  // Specify the height
+                    />
+                  </div>
                 </div>
-               </div>
                 <div>
                   <h3 className="font-bold text-sm">{stock.symbol}</h3>
                   <p className="text-sm text-gray-500">{stock.name}</p>
